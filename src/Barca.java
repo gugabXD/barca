@@ -21,13 +21,22 @@ public class Barca {
         */
 
     public int ocupaLugar(String assentoInformado){
-        String[] assento = assentoInformado.split("", 0);
-        if(assento.length!=6) return 0;
-        if(assento[0].equals("F")==false || assento[3].equals("A")==false) return 0;
-        int a = Integer.parseInt(assento[1]+assento[2]);
-        if(a<=0 || a>20) return 0;
-        int f = Integer.parseInt(assento[4]+assento[5]);
-        if(f<=0 || f>60) return 0;
+        if(verificaIdentificador(assentoInformado)==false) return 0;
         return -1;
+    }
+
+    public boolean verificaIdentificador(String assentoInformado){
+        String[] assento = assentoInformado.split("", 0);
+        if(assento.length!=6) return false;
+        if(assento[0].equals("F")==false || assento[3].equals("A")==false) return false;
+        try {
+            int a = Integer.parseInt(assento[1] + assento[2]);
+            if (a <= 0 || a > 20) return false;
+            int f = Integer.parseInt(assento[4] + assento[5]);
+            if (f <= 0 || f > 60) return false;
+        } catch(Exception e){
+            return false;
+        }
+        return true;
     }
 }
